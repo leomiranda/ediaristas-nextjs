@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React from 'react';
 import Document, {
 	Html,
@@ -19,16 +20,16 @@ export default class MyDocument extends Document {
 		ctx.renderPage = () =>
 			originalRenderPage({
 				enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
-      });
-    
-    const initialProps = await Document.getInitialProps(ctx)
+			});
 
-    return {
-      ...initialProps,
-      styles: [
-        ...React.Children.toArray(initialProps.styles),
-        sheets.getStyleElement()
-      ]
+		const initialProps = await Document.getInitialProps(ctx);
+
+		return {
+			...initialProps,
+			styles: [
+				...React.Children.toArray(initialProps.styles),
+				sheets.getStyleElement(),
+			],
 		};
 	}
 
